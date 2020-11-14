@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gladiah</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="https://use.fontawesome.com/8f302b51db.js"></script>
+  <style>
+    .profile_icon{
+        width: 64px;
+        height: 64px;
+        padding-top: 8px;
+        text-align: center;
+        position: absolute;
+        background-color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        border: 4px solid #fff;
+        left: 5px;
+        bottom: -30px;
+        transition: 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" style="background-color: #000;">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <h3><a href="#intro" class="scrollto"><strong><font color="white">HAPPY BIRTHDAY GLADIAH</font></strong></a></h3>
+      </div>
+      <div style="background-color: #000; display: flex;">
+        <div class="icon m-1" title="Upload a post"><button data-toggle="modal" data-target="#exampleModal" style="background-color: #000; border-color: #000;"><i class="fa fa-camera fa-2x" style="color: #fff;"></i></button></div>
+        <div class="icon m-1" title="Comment in the live feed"><a href="comments.html"><button style="background-color: #000; border-color: #000;"><i class="fa fa-edit fa-2x" style="color: #fff;"></i></button></div>
+    </div>
+  </header></br>
+  <main id="main">
+    <section id="about">
+      <div style="height: 20px;"></div>
+      <div class="container">
+
+        <div class="row about-cols">
+
+          <div id="posts" class="col-md-12 wow fadeInUp">
+            <script >
+              var counter = 0;
+            </script>
+          </div>
+
+        </div>
+
+      </div>
+      <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </section>
+  </main>
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload a memory photo with Gladiah</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="upload_memory_form">
+          <label><strong>Select a memory photo with Gladiah:</strong></label>
+          <input type="file" id="memory_photo" required="required"><br><br>
+          <textarea id="message" required="required" class="form-control" placeholder="Enter a message for Gladiah..."></textarea><br><br>
+          <input type="text" id="uploader_name" required="required" class="form-control" class="form-control" placeholder="Enter your name....">
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="bg-danger btn" data-dismiss="modal" aria-label="Close" style="float: left;">
+         <font color="white">Close</font>
+        </button>
+        <button type="submit" class="btn btn-success">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.4.0/js/canvas-to-blob.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-storage.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyACKJmAJdpJ_ZMgcLbXyGj8sApksuDGTKo",
+    authDomain: "masomo-kwetu.firebaseapp.com",
+    databaseURL: "https://masomo-kwetu.firebaseio.com",
+    projectId: "masomo-kwetu",
+    storageBucket: "masomo-kwetu.appspot.com",
+    messagingSenderId: "353413157327",
+    appId: "1:353413157327:web:65a27bc524de77deab82ba",
+    measurementId: "G-M79KK63HSD"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script>
+//Declaration of the variable for connection to the database
+const database = firebase.database();
+//Declaration of the variable for authentication 
+const auth = firebase.auth();
+
+//Uploading post
+  const postForm = document.querySelector('#upload_memory_form');     
+   postForm.addEventListener('submit', (e) => {
+       e.preventDefault();
+        var file = document.getElementById("memory_photo").files[0];
+        var uploader = postForm['uploader_name'].value;
+        var message = postForm['message'].value;
+          var reader = new FileReader();
+          reader.onload = function() {    
+            var blob = window.dataURLtoBlob(reader.result);
+            console.log(blob, new File([blob], "image.png", {
+              type: "image/png"
+            }));
+          };
+          reader.readAsDataURL(file);
+          //Get name of the image and date
+          var name = file.name;
+          var dateStr = new Date().getTime();
+          var fileCompleteName = name + "_" +dateStr;
+          
+
+          //Reference to the firebase storage
+          var storageRef = firebase.storage().ref("/birthday/");
+          var postStorageRef = storageRef.child(fileCompleteName);
+          
+          //Push image to the storage
+          var uploadTask = postStorageRef.put(file);
+
+          //Observe state change events while uploading
+          uploadTask.on("state_changed", function(snapshot) {
+              
+              //Print the progress
+              var progressPercentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              alert("Uploading..." + progressPercentage + "% done");
+
+          },
+              //Catch any error that occurs during uploading process and print it
+              function error(err){
+
+                alert(err);
+
+              },
+              
+              //If image is uploaded successfully push details of image and uploader to the database
+              function complete()
+              {
+
+                 
+                 //Retrieve current user's information from database
+                 const auth = firebase.auth();
+                 var user = auth.currentUser;
+                  postStorageRef.getDownloadURL().then(function(url)
+                    {
+                        var time = new Date();
+                        var options = 
+                        {
+                          
+                          weekday: "long",
+                          month: "long",
+                          day: "2-digit",
+                          year: "numeric",
+
+                        };
+
+                        var ref =  database.ref('/birthday/').push();
+                        ref.set({
+                        
+                        image: url,
+                        uploader: uploader,
+                        counter: 1000 - counter,
+                        message: message,
+                        time: time.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true}),
+                        date: time.toLocaleString('en-US', options),
+                        
+                        })
+
+                 }).catch(err => {
+                              
+                              //Catch the error and print it
+                              if(err){
+                                alert(err);
+                              }
+                              else{
+                                postForm.reset();
+                                alert('Post uploaded successfully');
+                              }
+
+                         });
+                    
+              }
+
+          );
+       
+
+       });
+     
+</script>
+<script>    
+    //Retrieve all images from firebase storage and display
+    //Reference to database
+    //Declaration of the variable for connection to the database
+
+    var dbPosts = database.ref('/birthday/').orderByChild("counter");
+
+    //Retrive data
+    dbPosts.on('value', function(posts){
+   
+        if(posts.exists)
+        {
+          
+          var postsHtml = "";
+
+          posts.forEach(function(singlePost)
+          {
+
+           
+           postsHtml += "<div class='about-col'>";
+              postsHtml += "<div class='img'>";
+                postsHtml += "<img width='100%' src='";
+                postsHtml += singlePost.val().image;
+                postsHtml += "'>";
+                postsHtml += "<div class='profile_icon'><img height='50px' width='50px' class='rounded-circle' src='https://firebasestorage.googleapis.com/v0/b/masomo-kwetu.appspot.com/o/birthday_posts%2FBirthday-Cake-Recipe-Image-720x720.jpg?alt=media&token=9fe7719e-5839-4cb5-9356-77ab572986f7'";
+                postsHtml += "'></i></div></div></br>";
+              postsHtml += "<h5 style='margin-top: 10px; margin-left: 10px;''><font color='#000'>";
+              postsHtml += singlePost.val().uploader;
+              postsHtml += "</font></h5><p>";   
+              postsHtml += singlePost.val().message;
+              postsHtml += "</p></div>";
+            
+          });
+
+
+          document.getElementById('posts').innerHTML = postsHtml;
+
+        }
+
+    });
+</script>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

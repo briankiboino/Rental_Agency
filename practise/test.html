@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>	
+	<div class="container bg-danger">
+	<input type="text" id="first_name"></br>
+	<input type="text" id="last_name"></br>
+	<input type="text" id="email"></br>
+	<button id="submit" onclick="logIn()">Submit</button></br>
+	<button id="submit" onclick="readData()">Read</button>
+</div>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebase/7.14.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebase/7.14.0/firebase-firestore.js"></script>
+<script src="https://firebase.google.com/docs/web/setup#available-libraries"></script> 
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyCFBeAkfZPkpVgiud1G_icsEYsBM5x8D54",
+    authDomain: "our-school-fe9fe.firebaseapp.com",
+    databaseURL: "https://our-school-fe9fe.firebaseio.com",
+    projectId: "our-school-fe9fe",
+    storageBucket: "our-school-fe9fe.appspot.com",
+    messagingSenderId: "1069643690016",
+    appId: "1:1069643690016:web:4df9ecbe792170eb8d0c45",
+    measurementId: "G-0WX6NH2TT9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script src="index.js"></script>
+</body>
+</html>

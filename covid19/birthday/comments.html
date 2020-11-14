@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gladiah</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="https://use.fontawesome.com/8f302b51db.js"></script>
+  <style>
+    .profile_icon{
+        width: 64px;
+        height: 64px;
+        padding-top: 8px;
+        text-align: center;
+        position: absolute;
+        background-color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        border: 4px solid #fff;
+        left: 5px;
+        bottom: -30px;
+        transition: 0.3s;
+    }
+    .view_comments{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 1px;
+      display: inline-block;
+      padding: 8px 32px;
+      border-radius: 50px;
+      transition: 0.5s;
+      margin: 10px;
+      color: #fff;
+      background: #18d26e;
+    }
+    #comment{
+    display: flex;
+  }
+  #single_comment{
+     background-color: #DCDCDC; 
+     border-radius: 10px;
+  }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <h3><a href="#intro" class="scrollto"><strong><font color="white">HAPPY BIRTHDAY GLADIAH</font></strong></a></h3>
+      </div>
+        <div class="icon" title="Go back home" style="float: right;"><a href="birthday.html"><i class="fa fa-home fa-2x" style="color: #fff;"></i></a></div>
+    </div>
+  </header>
+  <main id="main" style="background-image: url(img/photography.png);">
+    <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="img/IMG-20200706-WA0000.jpg" alt=""></div>
+            <div class="carousel-container">
+              <button onclick="deletePosts()" href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200705-WA0002.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200705-WA0003.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200706-WA0001.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200705-WA0005.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200706-WA0002.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="img/IMG-20200706-WA0003.jpg" alt=""></div>
+            <div class="carousel-container">
+               <a href="#services" class="view_comments scrollto">Add comment</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section><br><br>
+  <div class="container">
+  <section style="background-image: url(img/photography.png);" id="comments">
+  </section>
+  <form id="add_comment_form">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Write Gladiah a comment..." required="required" id="comment">
+      <div class="input-group-append">
+        <button class="input-group-text bg-success" id="basic-addon2"><font color="white">Add</font></button>
+      </div>
+    </div>
+  </form>
+</div>
+  </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.4.0/js/canvas-to-blob.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-storage.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyACKJmAJdpJ_ZMgcLbXyGj8sApksuDGTKo",
+    authDomain: "masomo-kwetu.firebaseapp.com",
+    databaseURL: "https://masomo-kwetu.firebaseio.com",
+    projectId: "masomo-kwetu",
+    storageBucket: "masomo-kwetu.appspot.com",
+    messagingSenderId: "353413157327",
+    appId: "1:353413157327:web:65a27bc524de77deab82ba",
+    measurementId: "G-M79KK63HSD"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script>
+//Declaration of the variable for connection to the database
+const database = firebase.database();
+//Declaration of the variable for authentication 
+const auth = firebase.auth();
+ //Insert comment
+const commentForm = document.querySelector('#add_comment_form');
+        commentForm.addEventListener('submit', (s) => {
+            s.preventDefault();
+            var comment = commentForm['comment'].value;
+            var time = new Date();
+
+            //Data to be inserted
+             var options = 
+             {
+              
+              month: "long",
+              day: "2-digit",
+              year: "numeric",
+
+            };
+             var commentData = {
+
+             comment: comment,
+             "time": time.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true}),
+             "date": time.toLocaleString('en-US', options),
+
+             }
+
+            //Reference to database
+            const dbComments = database.ref('/birthday_comments/').push();
+            dbComments.set(commentData, function(err){  
+              if(err){
+                alert(err);
+              } 
+              else{
+                commentForm.reset();
+              }                
+           });
+
+      });
+
+</script>
+<script>
+    //Get all comments for this post
+    database.ref('/birthday_comments/').orderByChild("date").on('value', function(snapshot){
+
+       var postsHtml2 = "";
+
+         snapshot.forEach(function(eachComment)
+        {
+           postsHtml2 += "<div><div id='comment'>";
+             
+                               postsHtml2 += "<div id='single_comment'><strong><h8 id='author_name' style='margin-top: 5px; margin-left: 5px; margin-right: 5px; font-size: 12px;'><font color='black'>";
+                                     postsHtml2 += eachComment.val().date;
+                                     postsHtml2 += ": ";
+                                     postsHtml2 += eachComment.val().time;
+                               postsHtml2 += "</font></h8></strong></br>";
+                                   postsHtml2 += "<p style='margin-top: 5px; margin-left: 5px; margin-right: 5px;'>";
+                                   postsHtml2 += eachComment.val().comment;
+                         postsHtml2 += "</p></div></div></br>";
+
+        });
+
+         document.getElementById('comments').innerHTML = postsHtml2;
+                 
+      });
+
+</script>
+<script>
+  function deletePosts (){
+
+database.ref('/birthday/').orderByChild("message").equlaTo("happy").remove().then(() => {
+  alert("Post deleted successfully")
+  window.open("birthday.html", "_self");
+});
+  }
+</script>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

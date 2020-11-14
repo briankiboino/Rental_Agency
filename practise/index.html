@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+</head>
+<style>
+	.container{
+		margin-top: 230px;
+		height: 320px;
+		width: 650px;
+	}
+	#signin_button{
+	  color: green;
+	}
+	#forgot_password_link{
+		float: right;
+	}
+</style>
+<body>
+	<div class="container" style="background-color: red;">
+		<center>
+			<h2>
+				<font color="white">
+			      Log in here
+			    </font>  
+			 </h2>
+		</center><br><br>
+		<form>
+            <div class="input-group">
+			    <input type="text" placeholder="First name" required="required" id="first_name"></br>
+			    <input type="text" placeholder="Last name" required="required" id="last_name"></br>
+			    <input type="email" placeholder="Enter your email" required="required" id="email_field"></br>
+			 </div>
+			 
+           <button  id="signin_button" onclick="registerUser()">Sign in</button>
+        <a href="forgot.html" id="forgot_password_link"><font color="white">forgot password?</font></a>
+    </form>
+	</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyACKJmAJdpJ_ZMgcLbXyGj8sApksuDGTKo",
+    authDomain: "masomo-kwetu.firebaseapp.com",
+    databaseURL: "https://masomo-kwetu.firebaseio.com",
+    projectId: "masomo-kwetu",
+    storageBucket: "masomo-kwetu.appspot.com",
+    messagingSenderId: "353413157327",
+    appId: "1:353413157327:web:65a27bc524de77deab82ba",
+    measurementId: "G-M79KK63HSD"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+</body>
+</html>
